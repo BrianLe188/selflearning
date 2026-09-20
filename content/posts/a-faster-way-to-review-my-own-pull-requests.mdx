@@ -1,0 +1,16 @@
+---
+title: "A faster way to review my own pull requests"
+date: "2026-03-30"
+tag: "Tips"
+excerpt: "A short checklist I run before asking anyone else to look at my code."
+---
+
+Working alone most of the time means I'm both the author and the only reviewer most of my code gets before it ships. For a while that meant either skipping review entirely or doing a half-hearted skim that caught almost nothing.
+
+## The checklist
+
+A few minutes, every time, before opening a pull request: read the diff as if someone else wrote it, check for anything that only makes sense because I already know the context, and actually run the change one more time instead of trusting that it still works.
+
+## Why it's worth the few minutes
+
+Most of what it catches isn't bugs — it's the small things that make code harder for future-me to come back to: a variable name that made sense in the moment, a comment that's now wrong, a shortcut I meant to clean up and forgot. Cheap to catch here, expensive to find later.

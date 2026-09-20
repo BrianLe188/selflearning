@@ -1,0 +1,16 @@
+---
+title: "Why I stopped extending my own file format"
+date: "2026-07-22"
+tag: "Tips"
+excerpt: "A short note on restraint, and why the boring standard usually wins over the clever one."
+---
+
+A couple of years ago I designed a small custom file format for a side project — nothing fancy, just a way to store structured notes with a bit more metadata than plain Markdown allows. It worked, and for a while I kept extending it: new fields, new syntax, a parser that grew more clever with every release.
+
+Eventually I noticed I was spending more time maintaining the format than using it. Every new feature meant updating the parser, the syntax highlighter, and the three tools I'd built around it — for a benefit that a boring existing standard would have given me for free.
+
+## The boring choice
+
+I migrated everything to plain Markdown with YAML frontmatter. It's less expressive in a few narrow ways, but it's supported everywhere, understood by every tool I already use, and I haven't touched the parser since.
+
+Restraint doesn't feel as good as building something clever, but it's usually the right call.

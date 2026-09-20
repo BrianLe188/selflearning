@@ -1,0 +1,16 @@
+---
+title: "I made a session manager for my terminal tool of choice"
+date: "2026-08-10"
+tag: "Tips"
+excerpt: "A small utility for juggling multiple long-running sessions without losing track of any of them."
+---
+
+Once I had more than three or four long-running terminal sessions going at once, keeping track of which one was doing what became its own chore. Session names defaulted to numbers, windows all looked the same at a glance, and I'd regularly kill the wrong one.
+
+So I wrote a small wrapper script that names sessions after the project and task they're tied to, shows a quick status line for each, and lets me jump straight to one by fuzzy-matching a few letters instead of remembering an index.
+
+## The part that mattered most
+
+Auto-naming turned out to matter more than any of the fancier features I added later. The moment sessions had meaningful names, the "which one was that in?" problem mostly disappeared on its own.
+
+It's a small utility — a few hundred lines, nothing clever — but it's one of those tools that quietly saves a few seconds dozens of times a day, and that adds up.

@@ -1,0 +1,16 @@
+---
+title: "The plugin system I keep almost finishing"
+date: "2026-03-02"
+tag: "Project"
+excerpt: "An honest look at a side project that’s been “almost done” for a year."
+---
+
+I've been building a plugin system for one of my tools for about a year now, and it has been "almost done" for most of that time. The core API has been stable for months. What's missing is always something smaller than I expect, and there's always another smaller thing after that.
+
+## Why it keeps slipping
+
+Every time I sit down to finish it, I find one more edge case worth handling — plugin load order, error isolation so one bad plugin can't take down the whole app, a versioning story I actually trust. Each one is reasonable on its own. Together they're why this has taken a year.
+
+## What I'm doing about it
+
+I've stopped adding anything new until the current list is done, and I picked a real ship date instead of a vague "when it's ready." An honestly imperfect plugin system that exists beats a perfect one that only ever lives in a branch.

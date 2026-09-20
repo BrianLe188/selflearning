@@ -1,26 +1,87 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/*
+  Design tokens ported 1:1 from tokens.css (see ../../../README.md in the
+  original mockup for the rationale). Values are not to be changed without
+  checking with the design source of truth first — only the *names* were
+  adapted to shadcn/ui's token vocabulary.
+*/
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-sans);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  /* Design's quiet second accent, reserved for inline code — no shadcn slot for this, so it's its own token */
+  --color-code-accent: var(--code-accent);
+  /* tokens.css only defines sm/md/full (no dark-mode variation), so these are
+     plain literals rather than indirected through :root like the colors above.
+     Every larger shadcn radius collapses to 10px since this design never
+     goes bigger than that. */
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 10px;
+  --radius-xl: 10px;
+  --radius-2xl: 10px;
+  --radius-3xl: 10px;
+  --radius-4xl: 999px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Color — ported from tokens.css */
+  --background: #faf9f6; /* --surface-100: page background */
+  --foreground: #1b1b18; /* --ink: primary text */
+  --card: #ffffff; /* --surface-200: cards, header, subscribe panel */
+  --card-foreground: #1b1b18;
+  --popover: #ffffff;
+  --popover-foreground: #1b1b18;
+  --primary: #d94f30; /* --brand: the one accent color */
+  --primary-foreground: #ffffff; /* --brand-ink */
+  --secondary: #f0efe9; /* --surface-300 */
+  --secondary-foreground: #1b1b18;
+  --muted: #f0efe9; /* --surface-300: inline code bg, quiet bands, thumb placeholder */
+  --muted-foreground: #6b6a63; /* --ink-muted: dates, byline, excerpts */
+  --accent: #f0efe9; /* --surface-300 */
+  --accent-foreground: #1b1b18;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #e6e4dc; /* hairline dividers — used instead of shadows */
+  --input: #e6e4dc;
+  --ring: #d94f30; /* --brand */
+  --code-accent: #2c5f5d; /* quiet second accent, inline code text only */
+
+  /* Type */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI",
+    sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
+    monospace;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
 }

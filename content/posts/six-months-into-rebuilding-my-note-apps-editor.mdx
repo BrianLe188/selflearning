@@ -1,0 +1,18 @@
+---
+title: "Six months into rebuilding my note app’s editor"
+date: "2026-09-07"
+tag: "Project"
+excerpt: "What changed under the hood, what broke along the way, and why I’m glad I didn’t rush it."
+---
+
+Half a year ago I ripped out the text editor at the core of my note-taking app and started over. The old one worked fine for short notes but fell apart on anything long — cursor jumps, dropped keystrokes, the occasional full freeze on a document over a few thousand words.
+
+The rebuild has been slower than I planned, mostly because I kept discovering edge cases I hadn't accounted for: pasted content from other apps, undo history across fast edits, cursor position after an async save. Each one felt small in isolation and added up to months of work.
+
+## What actually got better
+
+Typing latency on long documents dropped from noticeable to unmeasurable. Undo/redo finally behaves the way people expect instead of occasionally eating a paragraph. And the whole thing is small enough now that I can hold the entire data flow in my head.
+
+## Why I didn't rush it
+
+Every time I was tempted to ship a half-fixed version, I reminded myself that this editor is the one thing in the app people touch every single day. Getting it right mattered more than getting it out quickly, and six months later I still think that trade-off was correct.

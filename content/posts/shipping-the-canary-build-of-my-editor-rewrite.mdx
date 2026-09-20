@@ -1,0 +1,16 @@
+---
+title: "Shipping the canary build of my editor rewrite"
+date: "2026-07-03"
+tag: "Project"
+excerpt: "Release notes, the parts I’m proud of, and the parts I’m still not sure about."
+---
+
+After months of work behind a feature flag, the rewritten editor core shipped to a small canary group this week. Nothing catastrophic happened, which honestly felt like the biggest win of the release.
+
+The parts I'm proud of: startup time is down significantly, and the plugin API is finally stable enough that I trust it not to break on the next release. Early feedback on both has been better than I expected.
+
+## What I'm still unsure about
+
+The new undo model is technically more correct, but a couple of canary users have said it "feels different" in ways they can't quite articulate. I don't have a fix yet — just a note to pay close attention to that feedback before a wider rollout.
+
+Shipping something you're not 100% sure about is uncomfortable, but a canary group exists precisely so you can find that out before everyone else does.

@@ -1,0 +1,23 @@
+---
+title: "How I rebuilt my terminal workflow around Claude Code"
+date: "2026-09-19"
+tag: "Project"
+tags: ["Project", "Tips", "Terminal"]
+excerpt: "A behind-the-scenes look at the tmux setup, the popup windows, and the small habits that made agentic coding actually fit into my day."
+---
+
+For years my terminal setup was a pile of half-remembered habits: a few tmux panes I never quite arranged the same way twice, and a Claude Code session I'd tab back to and lose track of. It worked, mostly, but every context switch cost a few seconds of "wait, which pane was that in?"
+
+What finally pushed me to fix it wasn't a big failure — it was the small, repeated friction of starting a new session and rebuilding the same layout by hand, every single time.
+
+## The setup I landed on
+
+The core of it is a small tmux layout script that opens three panes: one for the editor, one for a running dev server, and one dedicated to `claude`. A single keybinding brings the Claude pane to full width when I need to read a long response, then shrinks it back down.
+
+The part that actually made a difference was giving the Claude pane its own persistent session, separate from whatever project window I'm in. That way switching projects doesn't mean starting the conversation over.
+
+## What I'd do differently
+
+If I were starting over, I'd build the session-naming convention first instead of retrofitting it later — half the friction I fought with was just not being able to tell two similarly named sessions apart at a glance.
+
+None of this is groundbreaking. It's the unglamorous kind of tooling work that just removes a little bit of daily friction — but after a few weeks, that adds up to a workflow that finally feels like mine instead of something I'm fighting.
