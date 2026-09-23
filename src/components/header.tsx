@@ -4,6 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { SubscribeForm } from "@/components/subscribe-form";
 import { siteConfig } from "@/site.config";
 
 export function Header() {
@@ -34,12 +43,27 @@ export function Header() {
               </Link>
             );
           })}
-          <Button
-            variant="outline"
-            nativeButton={false}
-            className="h-auto rounded-md border-primary bg-transparent px-4.5 py-2.5 text-sm font-semibold text-primary hover:bg-primary/10"
-            render={<a href="#">Subscribe</a>}
-          />
+          <Dialog>
+            <DialogTrigger
+              render={
+                <Button
+                  variant="outline"
+                  className="h-auto rounded-md border-primary bg-transparent px-4.5 py-2.5 text-sm font-semibold text-primary hover:bg-primary/10"
+                />
+              }
+            >
+              Subscribe
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>{siteConfig.subscribe.headline}</DialogTitle>
+                <DialogDescription>
+                  {siteConfig.subscribe.subtext}
+                </DialogDescription>
+              </DialogHeader>
+              <SubscribeForm />
+            </DialogContent>
+          </Dialog>
         </nav>
       </div>
     </header>

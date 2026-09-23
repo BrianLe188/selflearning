@@ -1,5 +1,8 @@
 "use server";
 
+import { db } from "@/db";
+import { subscribers } from "@/db/schema";
+
 export interface SubscribeState {
   status: "idle" | "success" | "error";
   message: string;
@@ -11,15 +14,22 @@ export async function subscribeAction(
   _prevState: SubscribeState,
   formData: FormData
 ): Promise<SubscribeState> {
-  const email = String(formData.get("email") ?? "").trim();
+  const email = String(formData.get("email") ?? "")
+    .trim()
+    .toLowerCase();
 
   if (!EMAIL_RE.test(email)) {
     return { status: "error", message: "Please enter a valid email address." };
   }
 
-  // TODO: replace with a real email-provider call (e.g. Resend, ConvertKit,
-  // Mailchimp) once one is wired up. For now this just logs the submission.
-  console.log(`[subscribe] new subscriber: ${email}`);
+  try {
+    await db.insert(subscribers).values({ email }).onConflictDoNothing();
+  } catch {
+    return {
+      status: "error",
+      message: "Something went wrong — please try again.",
+    };
+  }
 
   return { status: "success", message: "Thanks — you're on the list!" };
 }

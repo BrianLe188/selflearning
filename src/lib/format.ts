@@ -11,9 +11,10 @@ export function formatDate(iso: string): string {
 
 const WORDS_PER_MINUTE = 200;
 
-/** Estimates reading time from raw MDX/markdown body text, e.g. "6 min read". */
-export function getReadingTime(content: string): string {
-  const words = content.trim().split(/\s+/).filter(Boolean).length;
+/** Estimates reading time from rendered post HTML, e.g. "6 min read". */
+export function getReadingTime(html: string): string {
+  const text = html.replace(/<[^>]*>/g, " ");
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
   const minutes = Math.max(1, Math.round(words / WORDS_PER_MINUTE));
   return `${minutes} min read`;
 }

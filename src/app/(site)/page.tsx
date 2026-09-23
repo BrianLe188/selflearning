@@ -4,8 +4,19 @@ import { PostCard } from "@/components/post-card";
 import { Thumb } from "@/components/thumb";
 import { formatDate } from "@/lib/format";
 
-export default function HomePage() {
-  const posts = getAllPosts();
+export default async function HomePage() {
+  const posts = await getAllPosts();
+
+  if (posts.length === 0) {
+    return (
+      <section className="mx-auto w-full max-w-[760px] flex-grow px-6 py-20 text-center">
+        <p className="text-[15px] text-muted-foreground">
+          No posts published yet — check back soon.
+        </p>
+      </section>
+    );
+  }
+
   const featured = posts[0];
   const latest = posts.slice(1, 7);
 

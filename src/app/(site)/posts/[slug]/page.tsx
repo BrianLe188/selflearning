@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import {
   getAllSlugs,
   getPostBySlug,
@@ -9,18 +8,19 @@ import {
 } from "@/lib/posts";
 import { formatDate } from "@/lib/format";
 import { Thumb } from "@/components/thumb";
+import { ContentBody } from "@/components/content-body";
 import { Badge } from "@/components/ui/badge";
 import { siteConfig } from "@/site.config";
 
-export function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  return (await getAllSlugs()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps<"/posts/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return {};
 
   return {
@@ -35,24 +35,6 @@ export async function generateMetadata({
   };
 }
 
-const mdxComponents = {
-  h2: (props: React.ComponentProps<"h2">) => (
-    <h2
-      className="mt-10 mb-4 text-[26px] leading-8 font-bold text-foreground"
-      {...props}
-    />
-  ),
-  p: (props: React.ComponentProps<"p">) => (
-    <p className="mb-5 text-[17px] leading-7 text-foreground" {...props} />
-  ),
-  code: (props: React.ComponentProps<"code">) => (
-    <code
-      className="rounded-sm bg-muted px-1.5 py-0.5 font-mono text-sm text-code-accent"
-      {...props}
-    />
-  ),
-};
-
 function Dot() {
   return (
     <span
@@ -66,10 +48,10 @@ export default async function PostPage({
   params,
 }: PageProps<"/posts/[slug]">) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const related = getRelatedPosts(post.slug, 2);
+  const related = await getRelatedPosts(post.slug, 2);
 
   return (
     <article className="mx-auto w-full max-w-[680px] flex-grow px-6 pt-10">
@@ -112,9 +94,7 @@ export default async function PostPage({
 
       <Thumb variant="cover" src={post.coverImage} alt="" className="mb-6" />
 
-      <div>
-        <MDXRemote source={post.content} components={mdxComponents} />
-      </div>
+      <ContentBody html={post.contentHtml} className="post-content" />
 
       <div className="my-10 flex flex-wrap gap-2">
         {post.tags.map((tag) => (
