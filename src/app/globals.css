@@ -32,6 +32,13 @@
   --color-card: var(--card);
   /* Design's quiet second accent, reserved for inline code — no shadcn slot for this, so it's its own token */
   --color-code-accent: var(--code-accent);
+  /* Courses feature: "enrolled/started/completed" state — distinct from
+     --primary so it never reads as an ordinary link or button. No shadcn
+     slot for this either, so it's its own token like --code-accent above. */
+  --color-success: var(--success);
+  /* About page: muted marker dots on the process diagram and chapter
+     numbers — quieter than --border, its own token like --success above. */
+  --color-line-dot: var(--line-dot);
   /* Sidebar (admin layout) — no distinct sidebar palette in tokens.css, so
      these alias the existing card/border/muted tokens 1:1 rather than
      introducing new colors. */
@@ -75,6 +82,8 @@
   --input: #e6e4dc;
   --ring: #d94f30; /* --brand */
   --code-accent: #2c5f5d; /* quiet second accent, inline code text only */
+  --success: #15803d; /* Courses feature: enroll/start/complete state */
+  --line-dot: #c9c7bd; /* About page: muted marker dots (process diagram, chapter numbers) */
 
   /* Type */
   --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI",
