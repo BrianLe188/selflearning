@@ -4,7 +4,7 @@ import { siteConfig } from "@/site.config";
 export function Footer() {
   return (
     <footer className="w-full border-t border-border">
-      <div className="mx-auto flex w-full max-w-[760px] flex-wrap items-center justify-between gap-4 px-6 py-6">
+      <div className="mx-auto flex w-full max-w-[860px] flex-wrap items-center justify-between gap-4 px-6 py-6">
         <span className="text-[13px] text-muted-foreground">
           {siteConfig.authorName} — {siteConfig.name}
         </span>

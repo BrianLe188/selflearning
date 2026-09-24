@@ -21,24 +21,48 @@ function ThumbIcon({ size }: { size: number }) {
 }
 
 interface ThumbProps {
-  /** "cover" = full-width 16:9 hero image. "card" = fixed 140x96 list thumbnail. */
-  variant: "cover" | "card";
-  /** Path under /public. Omit to render the placeholder box (no real photo yet). */
+  /**
+   * "cover" = full-width 16:9 hero image (post detail).
+   * "card" = fixed 140x96 list thumbnail (post card).
+   * "course" = full-width 16:9 grid thumbnail, no caption (CourseCard).
+   * "row" = fixed 100x70 list thumbnail (CourseRow).
+   * "roadmap" = fixed 96x64 list thumbnail (ModuleTimelineItem).
+   */
+  variant: "cover" | "card" | "course" | "row" | "roadmap";
+  /** Path under /public, or a remote URL. Omit to render the placeholder box (no real photo yet). */
   src?: string;
   alt: string;
   className?: string;
 }
 
+const FIXED_SIZE: Record<"card" | "row" | "roadmap", string> = {
+  card: "h-24 w-[140px]",
+  row: "h-[70px] w-[100px]",
+  roadmap: "h-16 w-24",
+};
+
+const FIXED_SIZES_ATTR: Record<"card" | "row" | "roadmap", string> = {
+  card: "140px",
+  row: "100px",
+  roadmap: "96px",
+};
+
+const FIXED_ICON_SIZE: Record<"card" | "row" | "roadmap", number> = {
+  card: 22,
+  row: 22,
+  roadmap: 20,
+};
+
 /**
  * Replaces the mockup's `.thumb` placeholder box with a real `next/image`
- * once a post has a `coverImage`, falling back to the original placeholder
- * (icon + border box) for posts that don't have one yet.
+ * once content has an image, falling back to the original placeholder
+ * (icon + border box) for content that doesn't have one yet.
  */
 export function Thumb({ variant, src, alt, className }: ThumbProps) {
   const base =
     "relative shrink-0 overflow-hidden rounded-md border border-border bg-muted flex items-center justify-center";
 
-  if (variant === "cover") {
+  if (variant === "cover" || variant === "course") {
     return (
       <div
         className={cn(base, "w-full aspect-video flex-col gap-2", className)}
@@ -48,16 +72,18 @@ export function Thumb({ variant, src, alt, className }: ThumbProps) {
             src={src}
             alt={alt}
             fill
-            sizes="(min-width: 760px) 760px, 100vw"
+            sizes="(min-width: 860px) 860px, 100vw"
             className="object-cover"
-            priority
+            priority={variant === "cover"}
           />
         ) : (
           <>
-            <ThumbIcon size={32} />
-            <span className="text-xs text-muted-foreground/80">
-              Cover image
-            </span>
+            <ThumbIcon size={variant === "cover" ? 32 : 22} />
+            {variant === "cover" && (
+              <span className="text-xs text-muted-foreground/80">
+                Cover image
+              </span>
+            )}
           </>
         )}
       </div>
@@ -65,17 +91,17 @@ export function Thumb({ variant, src, alt, className }: ThumbProps) {
   }
 
   return (
-    <div className={cn(base, "h-24 w-[140px]", className)}>
+    <div className={cn(base, FIXED_SIZE[variant], className)}>
       {src ? (
         <Image
           src={src}
           alt={alt}
           fill
-          sizes="140px"
+          sizes={FIXED_SIZES_ATTR[variant]}
           className="object-cover"
         />
       ) : (
-        <ThumbIcon size={22} />
+        <ThumbIcon size={FIXED_ICON_SIZE[variant]} />
       )}
     </div>
   );

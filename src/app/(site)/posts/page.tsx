@@ -22,14 +22,19 @@ export default async function PostsPage({
     : "All";
   const page = Number(params.page) || 1;
 
-  const { posts, total, page: currentPage, totalPages } = await searchPosts({
+  const {
+    posts,
+    total,
+    page: currentPage,
+    totalPages,
+  } = await searchPosts({
     q: params.q,
     tag,
     page,
   });
 
   return (
-    <section className="mx-auto w-full max-w-[760px] flex-grow px-6 pt-10">
+    <section className="mx-auto w-full max-w-[860px] flex-grow px-6 pt-10">
       <h1 className="m-0 mb-2 text-[32px] leading-[38px] font-bold text-foreground">
         All posts
       </h1>

@@ -3,8 +3,8 @@
  * data appears in the UI reads from this file.
  */
 export const siteConfig = {
-  name: "Personal Dev Journal",
-  authorName: "[YOUR NAME]",
+  name: "Personal Journal",
+  authorName: "Viet Anh",
   authorBio: "Solo developer, writing about what I build",
   description:
     "A behind-the-scenes coding journal — projects, tips, and what I'm learning.",
@@ -16,7 +16,8 @@ export const siteConfig = {
   nav: [
     { label: "Home", href: "/" },
     { label: "All posts", href: "/posts" },
-    { label: "About", href: "#" },
+    { label: "Courses", href: "/courses" },
+    { label: "About", href: "/about" },
   ],
   footerTags: ["Tips", "Life", "Project"],
 } as const;

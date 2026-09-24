@@ -9,7 +9,7 @@ export default async function HomePage() {
 
   if (posts.length === 0) {
     return (
-      <section className="mx-auto w-full max-w-[760px] flex-grow px-6 py-20 text-center">
+      <section className="mx-auto w-full max-w-[860px] flex-grow px-6 py-20 text-center">
         <p className="text-[15px] text-muted-foreground">
           No posts published yet — check back soon.
         </p>
@@ -22,7 +22,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="mx-auto w-full max-w-[760px] px-6 pt-14 pb-10">
+      <section className="mx-auto w-full max-w-[860px] px-6 pt-14 pb-10">
         <Thumb
           variant="cover"
           src={featured.coverImage}
@@ -30,9 +30,7 @@ export default async function HomePage() {
           className="mb-6"
         />
         <div className="mb-4 flex items-center gap-2.5">
-          <span className="text-[13px] font-medium text-primary">
-            Featured
-          </span>
+          <span className="text-[13px] font-medium text-primary">Featured</span>
           <span
             aria-hidden="true"
             className="h-[3px] w-[3px] rounded-full bg-muted-foreground"
@@ -57,18 +55,21 @@ export default async function HomePage() {
         </Link>
       </section>
 
-      <div className="mx-auto w-full max-w-[760px] px-6">
+      <div className="mx-auto w-full max-w-[860px] px-6">
         <div className="border-t border-border" />
       </div>
 
-      <section className="mx-auto w-full max-w-[760px] flex-grow px-6 pt-4">
+      <section className="mx-auto w-full max-w-[860px] flex-grow px-6 pt-4">
         <div>
           {latest.map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}
         </div>
         <div className="py-6 pb-10 text-center">
-          <Link href="/posts" className="text-[15px] font-semibold text-primary">
+          <Link
+            href="/posts"
+            className="text-[15px] font-semibold text-primary"
+          >
             View all posts →
           </Link>
         </div>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FileText } from "lucide-react";
+import { FileText, GraduationCap } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -20,7 +20,10 @@ import { signOutAction } from "@/lib/auth-actions";
 import { siteConfig } from "@/site.config";
 
 /** Add new sections here as the admin grows (media library, subscribers, …). */
-const navItems = [{ title: "Posts", href: "/admin", icon: FileText }];
+const navItems = [
+  { title: "Posts", href: "/admin", icon: FileText },
+  { title: "Courses", href: "/admin/courses", icon: GraduationCap },
+];
 
 export function AppSidebar({ userEmail }: { userEmail: string }) {
   const pathname = usePathname();

@@ -1,0 +1,1 @@
+ALTER TABLE "course_modules" ADD COLUMN "video_url" text;

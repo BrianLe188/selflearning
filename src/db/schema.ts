@@ -60,6 +60,9 @@ export const subscribers = pgTable("subscribers", {
 // https://authjs.dev/getting-started/adapters/drizzle
 // ---------------------------------------------------------------------------
 
+export const userRole = ["admin", "visitor"] as const;
+export type UserRole = (typeof userRole)[number];
+
 export const users = pgTable("user", {
   id: text("id")
     .primaryKey()
@@ -68,6 +71,9 @@ export const users = pgTable("user", {
   email: text("email").unique(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
+  /** Read model only — the admin allow-list check (ADMIN_EMAIL) remains
+   *  the actual gate for /admin, see auth.ts. */
+  role: text("role", { enum: userRole }).notNull().default("visitor"),
 });
 
 export const accounts = pgTable(
