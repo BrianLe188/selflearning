@@ -9,6 +9,7 @@ import { PaginationBar } from "@/components/pagination-bar";
 export const metadata: Metadata = {
   title: "All courses",
   description: "Search and browse every course, filterable by track.",
+  alternates: { canonical: "/courses/search" },
 };
 
 export default async function CoursesSearchPage({

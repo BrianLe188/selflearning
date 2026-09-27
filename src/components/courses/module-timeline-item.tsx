@@ -32,7 +32,7 @@ export function ModuleTimelineItem({
           <Thumb
             variant="roadmap"
             src={module.thumbnailUrl}
-            alt=""
+            alt={module.title}
             className="flex-shrink-0"
           />
         )}

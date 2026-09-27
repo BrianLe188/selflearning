@@ -1,8 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/posts";
 import { PostCard } from "@/components/post-card";
 import { Thumb } from "@/components/thumb";
 import { formatDate } from "@/lib/format";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default async function HomePage() {
   const posts = await getAllPosts();
@@ -26,7 +31,7 @@ export default async function HomePage() {
         <Thumb
           variant="cover"
           src={featured.coverImage}
-          alt=""
+          alt={featured.title}
           className="mb-6"
         />
         <div className="mb-4 flex items-center gap-2.5">

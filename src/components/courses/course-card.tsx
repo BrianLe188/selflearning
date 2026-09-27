@@ -10,7 +10,7 @@ export function CourseCard({ course }: { course: Course }) {
       href={`/courses/${course.slug}`}
       className="flex flex-col overflow-hidden rounded-md border border-border bg-card hover:border-muted-foreground/40"
     >
-      <Thumb variant="course" src={course.coverImage} alt="" />
+      <Thumb variant="course" src={course.coverImage} alt={course.title} />
       <div className="flex flex-grow flex-col gap-2 p-4">
         <div className="flex items-center gap-2">
           <Badge

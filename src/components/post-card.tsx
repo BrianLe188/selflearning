@@ -34,7 +34,7 @@ export function PostCard({ post }: { post: Post }) {
           {post.excerpt}
         </p>
       </div>
-      <Thumb variant="card" src={post.coverImage} alt="" />
+      <Thumb variant="card" src={post.coverImage} alt={post.title} />
     </Card>
   );
 }

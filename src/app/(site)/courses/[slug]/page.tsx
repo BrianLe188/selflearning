@@ -6,6 +6,8 @@ import { enrollUser, getCourseBySlug, isEnrolled } from "@/lib/courses";
 import { EnrollButton } from "@/components/courses/enroll-button";
 import { ModuleTimelineItem } from "@/components/courses/module-timeline-item";
 import { Badge } from "@/components/ui/badge";
+import { JsonLd } from "@/lib/json-ld";
+import { siteConfig } from "@/site.config";
 
 export async function generateMetadata({
   params,
@@ -17,6 +19,7 @@ export async function generateMetadata({
   return {
     title: course.title,
     description: course.description,
+    alternates: { canonical: `/courses/${slug}` },
   };
 }
 
@@ -42,8 +45,41 @@ export default async function CourseDetailPage({
     redirect(`/courses/${course.slug}`);
   }
 
+  const courseUrl = `${siteConfig.url}/courses/${course.slug}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Course",
+        name: course.title,
+        description: course.description,
+        url: courseUrl,
+        provider: {
+          "@type": "Person",
+          name: siteConfig.authorName,
+          url: siteConfig.url,
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Courses",
+            item: `${siteConfig.url}/courses`,
+          },
+          { "@type": "ListItem", position: 3, name: course.title, item: courseUrl },
+        ],
+      },
+    ],
+  };
+
   return (
     <article className="mx-auto w-full max-w-[680px] flex-grow px-6 pt-10">
+      <JsonLd data={jsonLd} />
       <Link
         href="/courses"
         className="mb-6 inline-block text-sm font-semibold text-muted-foreground hover:text-foreground"

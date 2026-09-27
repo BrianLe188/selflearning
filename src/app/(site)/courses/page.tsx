@@ -6,6 +6,7 @@ import { CourseCard } from "@/components/courses/course-card";
 export const metadata: Metadata = {
   title: "Courses",
   description: "Curated learning paths, grouped by track.",
+  alternates: { canonical: "/courses" },
 };
 
 export default async function CoursesPage() {

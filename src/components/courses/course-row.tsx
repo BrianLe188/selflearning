@@ -10,7 +10,7 @@ export function CourseRow({ course }: { course: Course }) {
       href={`/courses/${course.slug}`}
       className="flex items-start gap-5 border-b border-border py-5 hover:border-muted-foreground/40"
     >
-      <Thumb variant="row" src={course.coverImage} alt="" />
+      <Thumb variant="row" src={course.coverImage} alt={course.title} />
       <div className="flex min-w-0 flex-grow flex-col gap-1.5">
         <div className="flex flex-wrap items-center gap-2">
           <Badge

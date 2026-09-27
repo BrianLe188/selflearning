@@ -10,6 +10,7 @@ import { formatDate } from "@/lib/format";
 import { Thumb } from "@/components/thumb";
 import { ContentBody } from "@/components/content-body";
 import { Badge } from "@/components/ui/badge";
+import { JsonLd } from "@/lib/json-ld";
 import { siteConfig } from "@/site.config";
 
 export async function generateStaticParams() {
@@ -26,6 +27,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: { canonical: `/posts/${slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -52,9 +54,43 @@ export default async function PostPage({
   if (!post) notFound();
 
   const related = await getRelatedPosts(post.slug, 2);
+  const postUrl = `${siteConfig.url}/posts/${post.slug}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.excerpt,
+        image: post.coverImage,
+        datePublished: post.date,
+        url: postUrl,
+        mainEntityOfPage: postUrl,
+        author: {
+          "@type": "Person",
+          name: siteConfig.authorName,
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "All posts",
+            item: `${siteConfig.url}/posts`,
+          },
+          { "@type": "ListItem", position: 3, name: post.title, item: postUrl },
+        ],
+      },
+    ],
+  };
 
   return (
     <article className="mx-auto w-full max-w-[680px] flex-grow px-6 pt-10">
+      <JsonLd data={jsonLd} />
       <Link
         href="/posts"
         className="mb-6 inline-block text-sm font-semibold text-muted-foreground hover:text-foreground"
@@ -92,7 +128,7 @@ export default async function PostPage({
         </div>
       </div>
 
-      <Thumb variant="cover" src={post.coverImage} alt="" className="mb-6" />
+      <Thumb variant="cover" src={post.coverImage} alt={post.title} className="mb-6" />
 
       <ContentBody html={post.contentHtml} className="post-content" />
 

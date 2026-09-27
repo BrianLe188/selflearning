@@ -9,6 +9,7 @@ import { PaginationBar } from "@/components/pagination-bar";
 export const metadata: Metadata = {
   title: "All posts",
   description: "Search and browse every post, filterable by tag.",
+  alternates: { canonical: "/posts" },
 };
 
 export default async function PostsPage({
