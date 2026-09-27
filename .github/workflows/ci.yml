@@ -77,3 +77,15 @@ jobs:
 
       - name: Build
         run: bun run build
+
+  deploy:
+    name: Deploy to Render
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Render deploy hook
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.SELFLEARNING_RENDER_DEPLOY_HOOK_URL }}
+        run: curl --fail --silent --show-error -X POST "$RENDER_DEPLOY_HOOK_URL"
