@@ -4,10 +4,9 @@ import { StatsCard } from "@/components/about/stats-card";
 import { Chapter } from "@/components/about/chapter";
 import { SkillsGrid } from "@/components/about/skills-grid";
 import { ExperienceTimeline } from "@/components/about/experience-timeline";
-import {
-  ProcessDiagram,
-  PROCESS_PHASES,
-} from "@/components/about/process-diagram";
+import { ProcessDiagram } from "@/components/about/process-diagram";
+import { ProcessViews } from "@/components/about/process-views";
+import { PROCESS_PHASES } from "@/lib/process-data";
 import { AboutSideNav } from "@/components/about/about-side-nav";
 
 export const metadata: Metadata = {
@@ -80,24 +79,28 @@ export default function AboutPage() {
       </div>
 
       <section id="sec-process" className="w-full border-y border-border">
-        <div className="mx-auto flex max-w-[1100px] gap-5 px-6 py-10">
-          <span className="shrink-0 text-[56px] leading-none font-extrabold text-muted">
-            03
-          </span>
-          <div className="min-w-0 flex-1">
-            <span className="text-[13px] font-semibold tracking-[0.02em] text-primary">
-              My Process
+        <div className="mx-auto py-10">
+          <div className="min-w-0 flex-1 gap-5 flex max-w-[860px] mx-auto">
+            <span className="shrink-0 text-[56px] leading-none font-extrabold text-muted px-6">
+              03
             </span>
-            <h2 className="mt-4 mb-2 text-2xl leading-[30px] font-bold text-foreground">
-              From brief to delivery
-            </h2>
-            <p className="mb-6 max-w-[640px] text-sm leading-[22px] text-muted-foreground">
-              As a freelance fullstack developer, I run every project through
-              the same disciplined pipeline — with sign-off checkpoints built
-              in, so nothing ships as a surprise.
-            </p>
-            <ProcessDiagram phases={PROCESS_PHASES} />
+            <div>
+              <span className="text-[13px] font-semibold tracking-[0.02em] text-primary">
+                My Process
+              </span>
+              <h2 className="mt-4 mb-2 text-2xl leading-[30px] font-bold text-foreground">
+                From brief to delivery
+              </h2>
+              <p className="mb-6 max-w-[640px] text-sm leading-[22px] text-muted-foreground">
+                As a freelance fullstack developer, I run every project through
+                the same disciplined pipeline — with sign-off checkpoints built
+                in, so nothing ships as a surprise.
+              </p>
+            </div>
           </div>
+          <ProcessViews phases={PROCESS_PHASES}>
+            <ProcessDiagram phases={PROCESS_PHASES} />
+          </ProcessViews>
         </div>
       </section>
 
